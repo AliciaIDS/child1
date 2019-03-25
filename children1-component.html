@@ -1,0 +1,80 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="children1-component">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <children1-component><slot>
+      <h2>[[iTitle]]</h2>
+      <p>[[iDescription]]</p>
+      <button on-click ='muestraLista'>Lista</button>
+      <button on-click = 'muestraTabla'>Tabla</button>
+    </slot></children1-component>
+  </template>
+
+  <script>
+    /**
+     * `children1-component`
+     * Componente con los dos botones, titulo y descripcion
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class Children1Component extends Polymer.Element {
+      static get is() { return 'children1-component'; }
+      static get properties() {
+        return {
+          iId: {
+            type: String,
+            value: 'ids-element',
+            reflectToAttribute: true
+          },
+          iName: {
+            type: String,
+            value: 'ids-element',
+            reflectToAttribute: true
+          },
+          iAction:{
+            type: String,
+            value: '',
+            reflectToAttribute: true
+          },
+          iTitle:{
+            type:String,
+            value:'Este es el titulo de Children1'
+          },
+          iDescription:{
+            type:String,
+            value:'Esta es la descripcion de Children1'
+          }
+        }
+      }
+
+      constructor() {
+        super();
+      }
+
+      ready(){
+        super.ready(); 
+        this.addEventListener('click', this.actionEvent.bind(this));
+      }
+
+      muestraLista(e){
+        e.preventDefault();
+        console.log("esto debería mostrar una lista");
+      }
+
+      muestraTabla(e){
+        e.preventDefault();
+        console.log("esto deberia mostrar una Tabla")
+      }
+    }
+
+
+    window.customElements.define(Children1Component.is, Children1Component);
+  </script>
+</dom-module>
