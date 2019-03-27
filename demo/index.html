@@ -19,12 +19,15 @@
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <h3>Basic children1-component demo</h3>
       <demo-snippet>
         <template>
           <children1-component></children1-component>
         </template>
       </demo-snippet>
     </div>
+    <script>
+      document.addEventListener('visible-list',console.log);
+      document.addEventListener('visible-table', console.log);
+    </script>
   </body>
 </html>

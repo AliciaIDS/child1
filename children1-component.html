@@ -7,12 +7,12 @@
         display: block;
       }
     </style>
-    <children1-component><slot>
+    <slot>
       <h2>[[iTitle]]</h2>
       <p>[[iDescription]]</p>
-      <button on-click ='muestraLista'>Lista</button>
-      <button on-click = 'muestraTabla'>Tabla</button>
-    </slot></children1-component>
+      <button on-click='showList'>Lista</button>
+      <button on-click='showTable'>Tabla</button>
+    </slot>
   </template>
 
   <script>
@@ -28,16 +28,6 @@
       static get is() { return 'children1-component'; }
       static get properties() {
         return {
-          iId: {
-            type: String,
-            value: 'ids-element',
-            reflectToAttribute: true
-          },
-          iName: {
-            type: String,
-            value: 'ids-element',
-            reflectToAttribute: true
-          },
           iAction:{
             type: String,
             value: '',
@@ -45,11 +35,11 @@
           },
           iTitle:{
             type:String,
-            value:'Este es el titulo de Children1'
+            value:'Este es el titulo de Child1'
           },
           iDescription:{
             type:String,
-            value:'Esta es la descripcion de Children1'
+            value:'Esta es la descripcion de Child1'
           }
         }
       }
@@ -60,17 +50,26 @@
 
       ready(){
         super.ready(); 
-        this.addEventListener('click', this.actionEvent.bind(this));
       }
 
-      muestraLista(e){
-        e.preventDefault();
-        console.log("esto debería mostrar una lista");
+      showList(e){
+        let showList = new CustomEvent('visible-list',{
+          bubbles:true,
+          notify:true,
+          composed: true,
+          detail:'showList'
+        })
+        this.dispatchEvent(showList);
       }
 
-      muestraTabla(e){
-        e.preventDefault();
-        console.log("esto deberia mostrar una Tabla")
+      showTable(e){
+        let showTable = new CustomEvent('visible-table',{
+          bubbles:true,
+          notify:true,
+          composed: true,
+          detail:'showTable'
+        })
+        this.dispatchEvent(showTable);
       }
     }
 
